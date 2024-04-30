@@ -1,0 +1,26 @@
+html {
+  /* background: tomato; */
+  /* visibility: hidden; */
+  background: rgb(69, 69, 69);
+
+  color: rgb(242, 242, 242);
+  background-size: 3px;
+  font-family: Inter;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+body {
+  margin: 0;
+}
+
+.style {
+  margin: 0 auto;
+  max-width: 736px;
+}
+
+*,
+*before,
+*after {
+  box-sizing: inherit;
+}

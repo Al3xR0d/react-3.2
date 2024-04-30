@@ -1,0 +1,28 @@
+.buttons {
+  /* Group 1 */
+  /* position: absolute; */
+  /* width: 388px; */
+  height: 36px;
+  display: flex;
+  /* left: 0;
+  right: -12px;
+  top: 0;
+  bottom: 0; */
+}
+
+.btn {
+  color: rgb(242, 242, 242);
+  border-radius: 8px;
+  background: rgb(30, 111, 159);
+  /* Button */
+  position: relative;
+  width: 132px;
+  height: 36px;
+  /* Автолейаут */
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  margin-right: 16px;
+}

@@ -1,0 +1,32 @@
+.head {
+  /* position: absolute; */
+  /* width: 92px; */
+  /* height: 48px;
+  left: 686px;
+  right: -652px;
+  top: 72px;
+  bottom: -72px;
+  font-family: Inter; */
+  background: rgb(13, 13, 13);
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 48px;
+  display: flex;
+  justify-content: center;
+  /* letter-spacing: 0%; */
+  text-align: left;
+  padding: 44px;
+  margin: 0;
+}
+
+.rocket {
+  padding-right: 10px;
+}
+
+.to {
+  color: rgb(78, 168, 222);
+}
+
+.do {
+  color: rgb(94, 96, 206);
+}

@@ -1,0 +1,21 @@
+.todo-list-item.done .todo-list-item-label {
+  text-decoration: line-through;
+}
+
+.done {
+  text-decoration: line-through;
+  color: rgb(128, 128, 128);
+}
+
+/* .pictures {
+  display: flex;
+  flex-direction: row;
+} */
+
+.deleteBtn:hover {
+  cursor: pointer;
+}
+
+.todoList {
+  display: flex;
+}
