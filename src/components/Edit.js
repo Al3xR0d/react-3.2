@@ -1,25 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Edit from '../pictures/edit-line-black.png';
 
-// const EditPic = () => {
-//   return (
-//     <div>
-//       <img src={Edit} />
-//     </div>
-//   );
-// };
-
-// export default EditPic;
-
 export default class EditPic extends React.Component {
   render() {
-    // const { onEdit } = this.props;
+    const { handleEditTask } = this.props;
     return (
-      <div>
-        {/* <img className="trash" src={Edit} onClick={onEdit} /> */}
+      <div onClick={handleEditTask}>
         <img className="trash" src={Edit} />
       </div>
     );
   }
 }
+
+EditPic.propTypes = {
+  handleEditTask: PropTypes.func.isRequired,
+};

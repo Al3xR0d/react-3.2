@@ -7,15 +7,19 @@
   color: rgb(128, 128, 128);
 }
 
-/* .pictures {
-  display: flex;
-  flex-direction: row;
-} */
-
 .deleteBtn:hover {
   cursor: pointer;
 }
 
 .todoList {
   display: flex;
+}
+
+.inputEdit {
+  width: 600px;
+  border: none;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  background-color: transparent;
+  outline: none;
+  color: rgb(242, 242, 242);
 }

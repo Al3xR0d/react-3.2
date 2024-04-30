@@ -5,7 +5,7 @@ import './Buttons.css';
 
 export default class Buttons extends React.Component {
   render() {
-    const { onFilterAll, onFilterDone, onFilterActive } = this.props;
+    const { onFilterAll, onFilterDone, onFilterActive, activeFilter, handleDeleteCompletedTasks } = this.props;
     return (
       <div className="buttons">
         <button type="button" className="buttons-tasks btn" onClick={onFilterAll}>
@@ -17,6 +17,16 @@ export default class Buttons extends React.Component {
         <button type="button" className="buttons-active btn" onClick={onFilterActive}>
           В процессее
         </button>
+        {activeFilter == 'done' ? (
+          <button
+            style={{ marginLeft: 'auto' }}
+            className="buttons-delete btn"
+            type="button"
+            onClick={handleDeleteCompletedTasks}
+          >
+            Очистить
+          </button>
+        ) : null}
       </div>
     );
   }
@@ -26,20 +36,6 @@ Buttons.propTypes = {
   onFilterAll: PropTypes.func.isRequired,
   onFilterDone: PropTypes.func.isRequired,
   onFilterActive: PropTypes.func.isRequired,
+  activeFilter: PropTypes.string.isRequired,
+  handleDeleteCompletedTasks: PropTypes.func.isRequired,
 };
-
-// const Buttons = () => {
-//   return (
-//     <div className="buttons">
-//       <button type="button" className="buttons-tasks btn">
-//         Все задачи
-//       </button>
-//       <button type="button" className="buttons-enable btn">
-//         Завершенные
-//       </button>
-//       <button type="button" className="buttons-active btn">
-//         В процессее
-//       </button>
-//     </div>
-//   );
-// };

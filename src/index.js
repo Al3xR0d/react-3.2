@@ -11,13 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoData: [this.createTodoItem('first'), this.createTodoItem('second'), this.createTodoItem('third')],
+      todoData: [],
       filter: 'all',
-      // todoData: [
-      //   { label: 'first', id: 1 },
-      //   { label: 'second', id: 2 },
-      //   { label: 'third', id: 3 },
-      // ],
     };
     this.deleteItem = this.deleteItem.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -25,6 +20,10 @@ class App extends React.Component {
     this.onFilterAll = this.onFilterAll.bind(this);
     this.onFilterDone = this.onFilterDone.bind(this);
     this.onFilterActive = this.onFilterActive.bind(this);
+    this.handleEditTask = this.handleEditTask.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSaveTask = this.handleSaveTask.bind(this);
+    this.handleDeleteCompletedTasks = this.handleDeleteCompletedTasks.bind(this);
   }
 
   createTodoItem(label) {
@@ -32,7 +31,40 @@ class App extends React.Component {
       label,
       done: false,
       id: Math.random(),
+      isEditing: false,
+      createTime: new Date(),
+      newName: '',
+      diffInMinutes: 0,
     };
+  }
+
+  handleDeleteCompletedTasks() {
+    this.setState((prevState) => ({
+      todoData: prevState.todoData.filter((task) => !task.done),
+    }));
+  }
+
+  handleEditTask(taskId) {
+    this.setState(({ todoData }) => {
+      const newArr = todoData.map((task) => (task.id === taskId ? { ...task, isEditing: true } : task));
+      return { todoData: newArr };
+    });
+  }
+
+  handleSaveTask(taskId) {
+    this.setState(({ todoData }) => {
+      const newArr = todoData.map((task) =>
+        task.id === taskId ? { ...task, label: task.newName, isEditing: false } : task
+      );
+      return { todoData: newArr };
+    });
+  }
+
+  handleInputChange(taskId, e) {
+    const newName = e.target.value;
+    this.setState((prevState) => ({
+      todoData: prevState.todoData.map((task) => (task.id === taskId ? { ...task, newName } : task)),
+    }));
   }
 
   deleteItem(id) {
@@ -45,29 +77,12 @@ class App extends React.Component {
     });
   }
 
-  // editItem = (id) => {
-  //   this.setState(({ todoData }) => {
-  //     todoData.map((item) => {
-  //       item.id === id ? { ...todoData, isEditing: !item.isEditing } : item;
-  //     });
-  //   });
-  // };
-
-  // let
-
   addItem(text) {
     const newItem = this.createTodoItem(text);
-    // const newItem = {
-    //   label: text,
-    //   id: Math.random(),
-    // };
+
     this.setState(({ todoData }) => {
-      // const newArr = [{ label: [text], id: Math.random() }, ...todoData];
       const newArr = [newItem, ...todoData];
       return { todoData: newArr };
-      // return {
-      //   todoData: [{ label: [text], id: Math.random() }, ...todoData],
-      // };
     });
   }
 
@@ -81,8 +96,28 @@ class App extends React.Component {
         todoData: newArr,
       };
     });
+  }
 
-    // console.log('done', id);
+  calculateDiffInMinutes(createTime) {
+    const currentTime = new Date();
+    const diffInMilliseconds = currentTime - createTime;
+    const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
+    return diffInMinutes;
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => {
+      const updatedElements = this.state.todoData.map((element) => ({
+        ...element,
+        diffInMinutes: this.calculateDiffInMinutes(element.createTime),
+      }));
+
+      this.setState({ todoData: updatedElements });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   onFilterAll() {
@@ -111,6 +146,8 @@ class App extends React.Component {
     const filteredTasks = this.filterTasks();
     const doneCount = this.state.todoData.filter((el) => el.done).length;
     const todoCount = this.state.todoData.length;
+    const activeFilter = this.state.filter;
+    const data = this.state.todoData;
     return (
       <div>
         <Header />
@@ -120,6 +157,8 @@ class App extends React.Component {
             onFilterAll={this.onFilterAll}
             onFilterDone={this.onFilterDone}
             onFilterActive={this.onFilterActive}
+            activeFilter={activeFilter}
+            handleDeleteCompletedTasks={this.handleDeleteCompletedTasks}
           />
           <Tasks onToggleDone={this.onToggleDone} todo={todoCount} done={doneCount} />
           <TodoList
@@ -127,37 +166,16 @@ class App extends React.Component {
             onDeleted={this.deleteItem}
             onToggleDone={this.onToggleDone}
             // onEdit={this.editItem}
+            handleInputChange={this.handleInputChange}
+            handleSaveTask={this.handleSaveTask}
+            handleEditTask={this.handleEditTask}
+            data={data}
           />
         </div>
       </div>
     );
   }
 }
-
-// const App = () => {
-//   const todoData = [
-//     { label: 'first', id: 1 },
-//     { label: 'second', id: 2 },
-//     { label: 'third', id: 3 },
-//   ];
-
-//   return (
-//     <div>
-//       <Header />
-//       <div className="style">
-//         <Search />
-//         <Buttons />
-//         <Tasks />
-//         <TodoList
-//           todoData={todoData}
-//           onDeleted={(id) => {
-//             console.log(id);
-//           }}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);

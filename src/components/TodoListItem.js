@@ -2,46 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './TodoListItem.css';
-// import EditPic from './Edit';
 
 export default class TodoListItem extends React.Component {
-  //   constructor() {
-  //     super();
-  //     this.state = {
-  //       done: false,
-  //     };
-  //     this.onLabelClick = () => {
-  //       this.setState((state) => {
-  //         // done: true,
-  //         return {
-  //           done: !state.done,
-  //         };
-  //         // done: !this.state.done,
-  //       });
-  //     };
-  //   }
-
   render() {
-    // const { label, onDeleted, onToggleDone, done } = this.props;
-    const { label, onToggleDone, done } = this.props;
-    // const { label, onDeleted } = this.props;
-    // const { done } = this.state;
-
+    const { label, done, handleInputChange, handleSaveTask, isEditing, id } = this.props;
     let classNames = 'todoListItem';
     if (done) {
       classNames += ' done';
     }
-    // this.onLabelClick
     return (
       <div className="todoList">
         <div className="text">
-          <span className={classNames}>
-            <span onClick={onToggleDone}>{label}</span>
-          </span>
+          {isEditing ? (
+            <input
+              className="inputEdit"
+              type="text"
+              onChange={handleInputChange}
+              onBlur={handleSaveTask}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleSaveTask(id);
+              }}
+              autoFocus
+            />
+          ) : (
+            <span className={classNames}>
+              <span>{label}</span>
+            </span>
+          )}
         </div>
-        {/* <div className="pictures">
-          <EditPic />
-        </div> */}
       </div>
     );
   }
@@ -51,15 +39,8 @@ TodoListItem.propTypes = {
   label: PropTypes.string.isRequired,
   onToggleDone: PropTypes.func.isRequired,
   done: PropTypes.bool.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleSaveTask: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
 };
-
-// const TodoListItem = (props) => {
-//   return (
-//     <span>
-//       {props.label}
-//       <button type="button" className="deleteBtn">
-//         X
-//       </button>
-//     </span>
-//   );
-// };

@@ -39,14 +39,7 @@ export default class Search extends React.Component {
           placeholder="Добавить новую задачу..."
           value={this.state.label}
         />
-        <button
-          type="button"
-          className="search-button"
-          onClick={this.onSubmit}
-          //   onClick={() => {
-          //     this.props.addItem('Hi');
-          //   }}
-        >
+        <button type="button" className="search-button" onClick={this.onSubmit}>
           Добавить
         </button>
       </form>
@@ -57,16 +50,3 @@ export default class Search extends React.Component {
 Search.propTypes = {
   addItem: PropTypes.func.isRequired,
 };
-
-// const Search = () => {
-//   return (
-//     <div className="search">
-//       <input className="search-panel" placeholder="Добавить новую задачу..." />
-//       <button type="button" className="search-button">
-//         Добавить
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Search;

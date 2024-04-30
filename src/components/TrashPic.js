@@ -4,15 +4,6 @@ import PropTypes from 'prop-types';
 import Trash from '../pictures/trash.png';
 import './TrashPic.css';
 
-// const TrashPic = () => {
-//   return (
-//     <div>
-//       <img src={Trash} />
-//     </div>
-//   );
-// };
-
-// export default TrashPic;
 export default class TrashPic extends React.Component {
   render() {
     const { onDeleted } = this.props;

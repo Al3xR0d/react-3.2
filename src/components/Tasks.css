@@ -19,24 +19,19 @@
 
 .tasksNumbers {
   border-radius: 999px;
-  /* Gray 400 */
   background: rgb(51, 51, 51);
   color: rgb(217, 217, 217);
 }
 
 .allTasksNumber {
-  /* Counter */
   position: static;
   width: 24px;
   height: 19px;
-  /* Автолейаут */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2px 8px 2px 8px;
-
-  /* Inside Auto Layout */
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -45,18 +40,14 @@
 
 .finishedTasksNumbers {
   margin: 0px 0px 0px 8px;
-  /* Counter */
   position: static;
   width: 51px;
   height: 19px;
-  /* Автолейаут */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 2px 8px 2px 8px;
-
-  /* Inside Auto Layout */
   flex: none;
   order: 1;
   flex-grow: 0;
