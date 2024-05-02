@@ -49,7 +49,7 @@
   display: inline-flex;
   align-items: center;
   user-select: none;
-  cursor: url(/src/pictures/cursor.png), auto;
+  cursor: url(/src/images/cursor.png), auto;
 }
 .custom-checkbox + label::before {
   content: '';

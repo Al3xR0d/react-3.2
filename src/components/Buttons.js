@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Buttons.css';
 
-export default class Buttons extends React.Component {
+class Buttons extends React.Component {
   render() {
     const { onFilterAll, onFilterDone, onFilterActive, activeFilter, handleDeleteCompletedTasks } = this.props;
     return (
@@ -39,3 +39,5 @@ Buttons.propTypes = {
   activeFilter: PropTypes.string.isRequired,
   handleDeleteCompletedTasks: PropTypes.func.isRequired,
 };
+
+export { Buttons };

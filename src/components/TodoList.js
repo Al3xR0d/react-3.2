@@ -2,23 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './TodoList.css';
-import TodoListItem from './TodoListItem';
-import TrashPic from './TrashPic';
-import EditPic from './Edit';
-import Tooltip from './Tooltip';
-
-function getMinutesText(minutes) {
-  const lastDigit = minutes % 10;
-  const lastTwoDigits = minutes % 100;
-
-  if (lastDigit === 1 && lastTwoDigits !== 11) {
-    return 'минуту';
-  } else if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(lastTwoDigits)) {
-    return 'минуты';
-  } else {
-    return 'минут';
-  }
-}
+import { EditPic } from './Edit';
+import { TodoListItem } from './TodoListItem';
+import { Tooltip } from './Tooltip';
+import { TrashPic } from './TrashPic';
+import { getMinutesText } from './helpers';
 
 const TodoList = ({ todoData, onDeleted, onToggleDone, handleEditTask, handleInputChange, handleSaveTask }) => {
   const elements = [...todoData]
@@ -87,4 +75,4 @@ TodoList.propTypes = {
   handleSaveTask: PropTypes.func.isRequired,
 };
 
-export default TodoList;
+export { TodoList };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './TodoListItem.css';
 
-export default class TodoListItem extends React.Component {
+class TodoListItem extends React.Component {
   render() {
     const { label, done, handleInputChange, handleSaveTask, isEditing, id } = this.props;
     let classNames = 'todoListItem';
@@ -44,3 +44,5 @@ TodoListItem.propTypes = {
   isEditing: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
 };
+
+export { TodoListItem };

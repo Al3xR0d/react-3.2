@@ -27,4 +27,4 @@ Tasks.propTypes = {
   done: PropTypes.number.isRequired,
 };
 
-export default Tasks;
+export { Tasks };

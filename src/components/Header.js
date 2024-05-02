@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Header.css';
-import Rocket from '../pictures/rocket.png';
+import Rocket from '../images/rocket.png';
 
 const Header = () => {
   return (
@@ -13,4 +13,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export { Header };

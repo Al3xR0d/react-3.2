@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Trash from '../pictures/trash.png';
+import Trash from '../images/trash.png';
 import './TrashPic.css';
 
-export default class TrashPic extends React.Component {
+class TrashPic extends React.Component {
   render() {
     const { onDeleted } = this.props;
     return (
@@ -18,3 +18,5 @@ export default class TrashPic extends React.Component {
 TrashPic.propTypes = {
   onDeleted: PropTypes.func.isRequired,
 };
+
+export { TrashPic };

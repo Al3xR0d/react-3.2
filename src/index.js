@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Header from './components/Header';
-import Search from './components/Search';
-import TodoList from './components/TodoList';
-import Buttons from './components/Buttons';
-import Tasks from './components/Tasks';
+import { Buttons } from './components/Buttons';
+import { Header } from './components/Header';
+import { Search } from './components/Search';
+import { Tasks } from './components/Tasks';
+import { TodoList } from './components/TodoList';
+import { createTodoItem, calculateDiffInMinutes } from './components/helpers';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,18 +25,6 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSaveTask = this.handleSaveTask.bind(this);
     this.handleDeleteCompletedTasks = this.handleDeleteCompletedTasks.bind(this);
-  }
-
-  createTodoItem(label) {
-    return {
-      label,
-      done: false,
-      id: Math.random(),
-      isEditing: false,
-      createTime: new Date(),
-      newName: '',
-      diffInMinutes: 0,
-    };
   }
 
   handleDeleteCompletedTasks() {
@@ -78,7 +67,7 @@ class App extends React.Component {
   }
 
   addItem(text) {
-    const newItem = this.createTodoItem(text);
+    const newItem = createTodoItem(text);
 
     this.setState(({ todoData }) => {
       const newArr = [newItem, ...todoData];
@@ -98,18 +87,11 @@ class App extends React.Component {
     });
   }
 
-  calculateDiffInMinutes(createTime) {
-    const currentTime = new Date();
-    const diffInMilliseconds = currentTime - createTime;
-    const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60));
-    return diffInMinutes;
-  }
-
   componentDidMount() {
     this.timerID = setInterval(() => {
       const updatedElements = this.state.todoData.map((element) => ({
         ...element,
-        diffInMinutes: this.calculateDiffInMinutes(element.createTime),
+        diffInMinutes: calculateDiffInMinutes(element.createTime),
       }));
 
       this.setState({ todoData: updatedElements });
@@ -165,7 +147,6 @@ class App extends React.Component {
             todoData={filteredTasks}
             onDeleted={this.deleteItem}
             onToggleDone={this.onToggleDone}
-            // onEdit={this.editItem}
             handleInputChange={this.handleInputChange}
             handleSaveTask={this.handleSaveTask}
             handleEditTask={this.handleEditTask}

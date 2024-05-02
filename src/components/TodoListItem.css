@@ -2,6 +2,10 @@
   text-decoration: line-through;
 }
 
+.todo-list-item {
+  font-size: 14px;
+}
+
 .done {
   text-decoration: line-through;
   color: rgb(128, 128, 128);

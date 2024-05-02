@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Search.css';
 
-export default class Search extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,3 +50,5 @@ export default class Search extends React.Component {
 Search.propTypes = {
   addItem: PropTypes.func.isRequired,
 };
+
+export { Search };

@@ -1,3 +1,23 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 12px;
+  /* color: #000; */
+  min-height: 100vh;
+}
+
 html {
   /* background: tomato; */
   /* visibility: hidden; */
@@ -5,7 +25,7 @@ html {
 
   color: rgb(242, 242, 242);
   background-size: 3px;
-  font-family: Inter;
+  /* font-family: Inter; */
   /* display: flex; */
   /* justify-content: center; */
 }
