@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './Header.css';
-import Rocket from '../images/rocket.png';
+import Rocket from '../../images/rocket.png';
 
-const Header = () => {
+const Header: FC = () => {
   return (
     <h1 className="head">
       <img src={Rocket} className="rocket" />

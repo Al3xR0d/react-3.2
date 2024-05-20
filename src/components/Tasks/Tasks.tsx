@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+// import PropTypes from 'prop-types';
+import { Ttasks } from './types';
 
 import './Tasks.css';
 
-const Tasks = ({ todo, done }) => {
+const Tasks: FC<Ttasks> = ({ todo, done }) => {
   return (
     <div className="tasks">
       <span className="allTasks tasksStyle">
@@ -22,9 +23,9 @@ const Tasks = ({ todo, done }) => {
   );
 };
 
-Tasks.propTypes = {
-  todo: PropTypes.number.isRequired,
-  done: PropTypes.number.isRequired,
-};
+// Tasks.propTypes = {
+//   todo: PropTypes.number.isRequired,
+//   done: PropTypes.number.isRequired,
+// };
 
 export { Tasks };

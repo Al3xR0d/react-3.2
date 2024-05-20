@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './Search.css';
 
-class Search extends React.Component {
-  constructor(props) {
+type TProps = {
+  addItem: (text: string) => void;
+};
+
+class Search extends React.Component<TProps, { label: string }> {
+  constructor(props: TProps) {
     super(props);
     this.state = {
       label: '',
@@ -12,13 +16,13 @@ class Search extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onLabelChange(event) {
+  onLabelChange(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       label: event.target.value,
     });
   }
 
-  onSubmit(event) {
+  onSubmit(event: React.FormEvent<HTMLFormElement | HTMLButtonElement>) {
     event.preventDefault();
     if (this.state.label.trim() === '') {
       return;
@@ -47,8 +51,8 @@ class Search extends React.Component {
   }
 }
 
-Search.propTypes = {
-  addItem: PropTypes.func.isRequired,
-};
+// Search.propTypes = {
+//   addItem: PropTypes.func.isRequired,
+// };
 
 export { Search };

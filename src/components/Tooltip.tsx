@@ -1,8 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
+// import PropTypes from 'prop-types';
 
-class Tooltip extends Component {
-  constructor(props) {
+type TPosition = { x: number; y: number };
+
+type PropsType = {
+  text: string;
+  children: ReactNode;
+};
+
+type StateType = {
+  showTooltip: boolean;
+  tooltipPosition: TPosition;
+};
+
+class Tooltip extends Component<PropsType, StateType> {
+  constructor(props: PropsType) {
     super(props);
     this.state = {
       showTooltip: false,
@@ -12,7 +24,7 @@ class Tooltip extends Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  handleMouseEnter(e) {
+  handleMouseEnter(e: React.MouseEvent<HTMLDivElement>) {
     const { clientX, clientY } = e;
     this.setState({ showTooltip: true, tooltipPosition: { x: clientX, y: clientY } });
   }
@@ -48,9 +60,9 @@ class Tooltip extends Component {
   }
 }
 
-Tooltip.propTypes = {
-  children: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-};
+// Tooltip.propTypes = {
+//   children: PropTypes.string.isRequired,
+//   text: PropTypes.string.isRequired,
+// };
 
 export { Tooltip };

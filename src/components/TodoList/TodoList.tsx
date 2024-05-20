@@ -1,14 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+// import PropTypes from 'prop-types';
+import { TtodoList } from './types';
 
 import './TodoList.css';
-import { EditPic } from './Edit';
-import { TodoListItem } from './TodoListItem';
-import { Tooltip } from './Tooltip';
-import { TrashPic } from './TrashPic';
-import { getMinutesText } from './helpers';
+import { EditPic } from '../Edit';
+import { TodoListItem } from '../TodoListItem/TodoListItem';
+import { Tooltip } from '../Tooltip';
+import { TrashPic } from '../TrashPic/TrashPic';
+import { getMinutesText } from '../helpers';
 
-const TodoList = ({ todoData, onDeleted, onToggleDone, handleEditTask, handleInputChange, handleSaveTask }) => {
+const TodoList: FC<TtodoList> = ({
+  todoData,
+  onDeleted,
+  onToggleDone,
+  handleEditTask,
+  handleInputChange,
+  handleSaveTask,
+}) => {
   const elements = [...todoData]
     .sort((a, b) => {
       if (a.done && !b.done) {
@@ -21,8 +29,8 @@ const TodoList = ({ todoData, onDeleted, onToggleDone, handleEditTask, handleInp
     })
     .map((item) => {
       const { id, done, ...itemProps } = item;
-      const checkboxId = `done-${id}`;
-      const minutesText = getMinutesText(item.diffInMinutes);
+      const checkboxId: string = `done-${id}`;
+      const minutesText: string = getMinutesText(item.diffInMinutes);
       return (
         <li key={item.id} className="todo-list-item">
           <Tooltip text={`Создана ${item.diffInMinutes} ${minutesText} назад`}>
@@ -39,9 +47,9 @@ const TodoList = ({ todoData, onDeleted, onToggleDone, handleEditTask, handleInp
                   {...itemProps}
                   done={item.done}
                   id={item.id}
-                  newName={item.newName}
-                  onToggleDone={() => onToggleDone(id)}
-                  handleInputChange={(e) => handleInputChange(id, e)}
+                  // newName={item.newName}
+                  //  onToggleDone={() => onToggleDone(id)}
+                  handleInputChange={handleInputChange}
                   handleSaveTask={() => handleSaveTask(id)}
                 />
               </label>
@@ -66,13 +74,13 @@ const TodoList = ({ todoData, onDeleted, onToggleDone, handleEditTask, handleInp
   );
 };
 
-TodoList.propTypes = {
-  todoData: PropTypes.array.isRequired,
-  onDeleted: PropTypes.func.isRequired,
-  onToggleDone: PropTypes.func.isRequired,
-  handleEditTask: PropTypes.func.isRequired,
-  handleInputChange: PropTypes.func.isRequired,
-  handleSaveTask: PropTypes.func.isRequired,
-};
+// TodoList.propTypes = {
+//   todoData: PropTypes.array.isRequired,
+//   onDeleted: PropTypes.func.isRequired,
+//   onToggleDone: PropTypes.func.isRequired,
+//   handleEditTask: PropTypes.func.isRequired,
+//   handleInputChange: PropTypes.func.isRequired,
+//   handleSaveTask: PropTypes.func.isRequired,
+// };
 
 export { TodoList };

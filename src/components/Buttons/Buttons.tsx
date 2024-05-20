@@ -1,9 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import './Buttons.css';
 
-class Buttons extends React.Component {
+class Buttons extends React.Component<{
+  onFilterAll: () => void;
+  onFilterDone: () => void;
+  onFilterActive: () => void;
+  activeFilter: string;
+  handleDeleteCompletedTasks: () => void;
+}> {
   render() {
     const { onFilterAll, onFilterDone, onFilterActive, activeFilter, handleDeleteCompletedTasks } = this.props;
     return (
@@ -32,12 +38,12 @@ class Buttons extends React.Component {
   }
 }
 
-Buttons.propTypes = {
-  onFilterAll: PropTypes.func.isRequired,
-  onFilterDone: PropTypes.func.isRequired,
-  onFilterActive: PropTypes.func.isRequired,
-  activeFilter: PropTypes.string.isRequired,
-  handleDeleteCompletedTasks: PropTypes.func.isRequired,
-};
+// Buttons.propTypes = {
+//   onFilterAll: PropTypes.func.isRequired,
+//   onFilterDone: PropTypes.func.isRequired,
+//   onFilterActive: PropTypes.func.isRequired,
+//   activeFilter: PropTypes.string.isRequired,
+//   handleDeleteCompletedTasks: PropTypes.func.isRequired,
+// };
 
 export { Buttons };

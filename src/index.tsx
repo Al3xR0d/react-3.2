@@ -1,19 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM, { Container } from 'react-dom/client';
 
-import { Buttons } from './components/Buttons';
-import { Header } from './components/Header';
-import { Search } from './components/Search';
-import { Tasks } from './components/Tasks';
-import { TodoList } from './components/TodoList';
+import { Buttons } from './components/Buttons/Buttons';
+import { Header } from './components/Header/Header';
+import { Search } from './components/Search/Search';
+import { Tasks } from './components/Tasks/Tasks';
+import { TodoList } from './components/TodoList/TodoList';
 import { createTodoItem, calculateDiffInMinutes } from './components/helpers';
+import { TodoObject } from './components/helpers';
 
-class App extends React.Component {
-  constructor(props) {
+type Tfiltres = { all: () => boolean; done: (task: TodoObject) => boolean; active: (task: TodoObject) => boolean };
+
+class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; timerID: NodeJS.Timeout | undefined }> {
+  constructor(props: any) {
     super(props);
     this.state = {
       todoData: [],
       filter: 'all',
+      timerID: undefined,
     };
     this.deleteItem = this.deleteItem.bind(this);
     this.addItem = this.addItem.bind(this);
@@ -33,54 +37,54 @@ class App extends React.Component {
     }));
   }
 
-  handleEditTask(taskId) {
+  handleEditTask(taskId: number) {
     this.setState(({ todoData }) => {
-      const newArr = todoData.map((task) => (task.id === taskId ? { ...task, isEditing: true } : task));
+      const newArr: TodoObject[] = todoData.map((task) => (task.id === taskId ? { ...task, isEditing: true } : task));
       return { todoData: newArr };
     });
   }
 
-  handleSaveTask(taskId) {
+  handleSaveTask(taskId: number) {
     this.setState(({ todoData }) => {
-      const newArr = todoData.map((task) =>
+      const newArr: TodoObject[] = todoData.map((task) =>
         task.id === taskId ? { ...task, label: task.newName, isEditing: false } : task
       );
       return { todoData: newArr };
     });
   }
 
-  handleInputChange(taskId, e) {
-    const newName = e.target.value;
+  handleInputChange(taskId: number, e: React.ChangeEvent<HTMLInputElement>) {
+    const newName: string = e.target.value;
     this.setState((prevState) => ({
       todoData: prevState.todoData.map((task) => (task.id === taskId ? { ...task, newName } : task)),
     }));
   }
 
-  deleteItem(id) {
+  deleteItem(id: number) {
     this.setState(({ todoData }) => {
-      const index = todoData.findIndex((item) => item.id === id);
-      const newArr = [...todoData.slice(0, index), ...todoData.slice(index + 1)];
+      const index: number = todoData.findIndex((item) => item.id === id);
+      const newArr: TodoObject[] = [...todoData.slice(0, index), ...todoData.slice(index + 1)];
       return {
         todoData: newArr,
       };
     });
   }
 
-  addItem(text) {
-    const newItem = createTodoItem(text);
+  addItem(text: string) {
+    const newItem: TodoObject = createTodoItem(text);
 
     this.setState(({ todoData }) => {
-      const newArr = [newItem, ...todoData];
+      const newArr: TodoObject[] = [newItem, ...todoData];
       return { todoData: newArr };
     });
   }
 
-  onToggleDone(id) {
+  onToggleDone(id: number) {
     this.setState(({ todoData }) => {
-      const index = todoData.findIndex((item) => item.id === id);
-      const oldItem = todoData[index];
-      const newItem = { ...oldItem, done: !oldItem.done };
-      const newArr = [...todoData.slice(0, index), newItem, ...todoData.slice(index + 1)];
+      const index: number = todoData.findIndex((item) => item.id === id);
+      const oldItem: TodoObject = todoData[index];
+      const newItem: TodoObject = { ...oldItem, done: !oldItem.done };
+      const newArr: TodoObject[] = [...todoData.slice(0, index), newItem, ...todoData.slice(index + 1)];
       return {
         todoData: newArr,
       };
@@ -88,18 +92,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.timerID = setInterval(() => {
-      const updatedElements = this.state.todoData.map((element) => ({
+    const timerID: NodeJS.Timeout = setInterval(() => {
+      const updatedElements: TodoObject[] = this.state.todoData.map((element) => ({
         ...element,
         diffInMinutes: calculateDiffInMinutes(element.createTime),
       }));
 
-      this.setState({ todoData: updatedElements });
+      this.setState({ todoData: updatedElements, timerID: timerID });
     }, 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    clearInterval(this.state.timerID);
   }
 
   onFilterAll() {
@@ -116,10 +120,10 @@ class App extends React.Component {
 
   filterTasks() {
     const { todoData, filter } = this.state;
-    const filtres = {
+    const filtres: Tfiltres = {
       all: () => true,
-      done: (task) => task.done,
-      active: (task) => !task.done,
+      done: (task: TodoObject) => task.done,
+      active: (task: TodoObject) => !task.done,
     };
     return todoData.filter(filtres[filter]);
   }
@@ -129,7 +133,7 @@ class App extends React.Component {
     const doneCount = this.state.todoData.filter((el) => el.done).length;
     const todoCount = this.state.todoData.length;
     const activeFilter = this.state.filter;
-    const data = this.state.todoData;
+    // const data = this.state.todoData;
     return (
       <div>
         <Header />
@@ -142,7 +146,7 @@ class App extends React.Component {
             activeFilter={activeFilter}
             handleDeleteCompletedTasks={this.handleDeleteCompletedTasks}
           />
-          <Tasks onToggleDone={this.onToggleDone} todo={todoCount} done={doneCount} />
+          <Tasks todo={todoCount} done={doneCount} />
           <TodoList
             todoData={filteredTasks}
             onDeleted={this.deleteItem}
@@ -150,7 +154,6 @@ class App extends React.Component {
             handleInputChange={this.handleInputChange}
             handleSaveTask={this.handleSaveTask}
             handleEditTask={this.handleEditTask}
-            data={data}
           />
         </div>
       </div>
@@ -158,5 +161,16 @@ class App extends React.Component {
   }
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement: HTMLElement | null = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement as HTMLElement);
 root.render(<App />);
+// if (rootElement) {
+//   const root: Container = ReactDOM.createRoot(rootElement);
+//   root.render(<App />);
+// }
+
+// const rootElement = document.getElementById('root');
+// if (rootElement) {
+//   const root: Container = ReactDOM.createRoot(rootElement);
+//   root.render(<App />);
+// }
