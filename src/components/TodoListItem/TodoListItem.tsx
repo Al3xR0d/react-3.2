@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 import './TodoListItem.css';
 
@@ -44,15 +43,5 @@ class TodoListItem extends React.Component<
     );
   }
 }
-
-// TodoListItem.propTypes = {
-//   label: PropTypes.string.isRequired,
-//   onToggleDone: PropTypes.func.isRequired,
-//   done: PropTypes.bool.isRequired,
-//   handleInputChange: PropTypes.func.isRequired,
-//   handleSaveTask: PropTypes.func.isRequired,
-//   isEditing: PropTypes.bool.isRequired,
-//   id: PropTypes.string.isRequired,
-// };
 
 export { TodoListItem };

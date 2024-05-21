@@ -1,10 +1,7 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import './Search.css';
 
-type TProps = {
-  addItem: (text: string) => void;
-};
+import { TProps } from './types';
 
 class Search extends React.Component<TProps, { label: string }> {
   constructor(props: TProps) {
@@ -50,9 +47,5 @@ class Search extends React.Component<TProps, { label: string }> {
     );
   }
 }
-
-// Search.propTypes = {
-//   addItem: PropTypes.func.isRequired,
-// };
 
 export { Search };

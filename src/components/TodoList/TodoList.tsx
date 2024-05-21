@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-// import PropTypes from 'prop-types';
-import { TtodoList } from './types';
+import { FC } from 'react';
 
-import './TodoList.css';
-import { EditPic } from '../Edit';
+import { EditPic } from '../Edit/Edit';
 import { TodoListItem } from '../TodoListItem/TodoListItem';
-import { Tooltip } from '../Tooltip';
+import { Tooltip } from '../Tooltip/Tooltip';
 import { TrashPic } from '../TrashPic/TrashPic';
 import { getMinutesText } from '../helpers';
+
+import { TtodoList } from './types';
+import './TodoList.css';
 
 const TodoList: FC<TtodoList> = ({
   todoData,
@@ -47,8 +47,6 @@ const TodoList: FC<TtodoList> = ({
                   {...itemProps}
                   done={item.done}
                   id={item.id}
-                  // newName={item.newName}
-                  //  onToggleDone={() => onToggleDone(id)}
                   handleInputChange={handleInputChange}
                   handleSaveTask={() => handleSaveTask(id)}
                 />
@@ -73,14 +71,5 @@ const TodoList: FC<TtodoList> = ({
     </div>
   );
 };
-
-// TodoList.propTypes = {
-//   todoData: PropTypes.array.isRequired,
-//   onDeleted: PropTypes.func.isRequired,
-//   onToggleDone: PropTypes.func.isRequired,
-//   handleEditTask: PropTypes.func.isRequired,
-//   handleInputChange: PropTypes.func.isRequired,
-//   handleSaveTask: PropTypes.func.isRequired,
-// };
 
 export { TodoList };

@@ -1,17 +1,6 @@
-import React, { Component, ReactNode } from 'react';
-// import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-type TPosition = { x: number; y: number };
-
-type PropsType = {
-  text: string;
-  children: ReactNode;
-};
-
-type StateType = {
-  showTooltip: boolean;
-  tooltipPosition: TPosition;
-};
+import { PropsType, StateType } from './types';
 
 class Tooltip extends Component<PropsType, StateType> {
   constructor(props: PropsType) {
@@ -59,10 +48,5 @@ class Tooltip extends Component<PropsType, StateType> {
     );
   }
 }
-
-// Tooltip.propTypes = {
-//   children: PropTypes.string.isRequired,
-//   text: PropTypes.string.isRequired,
-// };
 
 export { Tooltip };

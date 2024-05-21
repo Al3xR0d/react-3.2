@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 import Trash from '../../images/trash.png';
 import './TrashPic.css';
@@ -14,9 +13,5 @@ class TrashPic extends React.Component<{ onDeleted: () => void }, {}> {
     );
   }
 }
-
-// TrashPic.propTypes = {
-//   onDeleted: PropTypes.func.isRequired,
-// };
 
 export { TrashPic };

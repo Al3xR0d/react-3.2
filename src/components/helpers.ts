@@ -39,3 +39,7 @@ export function getMinutesText(minutes: number) {
     return 'минут';
   }
 }
+
+export type Tfiltres = {
+  [key: string]: (val?: TodoObject) => boolean;
+};

@@ -1,8 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
-import Edit from '../images/edit-line-black.png';
-
+import Edit from '../../images/edit-line-black.png';
 class EditPic extends React.Component<{ handleEditTask: () => void }, {}> {
   render() {
     const { handleEditTask } = this.props;
@@ -13,9 +11,5 @@ class EditPic extends React.Component<{ handleEditTask: () => void }, {}> {
     );
   }
 }
-
-// EditPic.propTypes = {
-//   handleEditTask: PropTypes.func.isRequired,
-// };
 
 export { EditPic };

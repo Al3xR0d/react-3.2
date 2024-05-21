@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM, { Container } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 
 import { Buttons } from './components/Buttons/Buttons';
 import { Header } from './components/Header/Header';
@@ -8,8 +8,7 @@ import { Tasks } from './components/Tasks/Tasks';
 import { TodoList } from './components/TodoList/TodoList';
 import { createTodoItem, calculateDiffInMinutes } from './components/helpers';
 import { TodoObject } from './components/helpers';
-
-type Tfiltres = { all: () => boolean; done: (task: TodoObject) => boolean; active: (task: TodoObject) => boolean };
+import { Tfiltres } from './components/helpers';
 
 class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; timerID: NodeJS.Timeout | undefined }> {
   constructor(props: any) {
@@ -122,8 +121,8 @@ class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; 
     const { todoData, filter } = this.state;
     const filtres: Tfiltres = {
       all: () => true,
-      done: (task: TodoObject) => task.done,
-      active: (task: TodoObject) => !task.done,
+      done: (task: TodoObject | undefined) => task!.done,
+      active: (task: TodoObject | undefined) => !task!.done,
     };
     return todoData.filter(filtres[filter]);
   }
@@ -164,13 +163,3 @@ class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; 
 const rootElement: HTMLElement | null = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement as HTMLElement);
 root.render(<App />);
-// if (rootElement) {
-//   const root: Container = ReactDOM.createRoot(rootElement);
-//   root.render(<App />);
-// }
-
-// const rootElement = document.getElementById('root');
-// if (rootElement) {
-//   const root: Container = ReactDOM.createRoot(rootElement);
-//   root.render(<App />);
-// }

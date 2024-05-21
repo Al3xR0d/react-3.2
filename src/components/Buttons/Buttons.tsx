@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 import './Buttons.css';
 
@@ -37,13 +36,5 @@ class Buttons extends React.Component<{
     );
   }
 }
-
-// Buttons.propTypes = {
-//   onFilterAll: PropTypes.func.isRequired,
-//   onFilterDone: PropTypes.func.isRequired,
-//   onFilterActive: PropTypes.func.isRequired,
-//   activeFilter: PropTypes.string.isRequired,
-//   handleDeleteCompletedTasks: PropTypes.func.isRequired,
-// };
 
 export { Buttons };
