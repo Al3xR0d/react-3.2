@@ -5,9 +5,18 @@ import { TodoListItem } from '../TodoListItem/TodoListItem';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { TrashPic } from '../TrashPic/TrashPic';
 import { getMinutesText } from '../helpers';
+import { TodoObject } from '../Types/types';
 
-import { TtodoList } from './types';
 import './TodoList.css';
+
+interface TtodoList {
+  todoData: TodoObject[];
+  onDeleted: (id: number) => void;
+  onToggleDone: (id: number) => void;
+  handleEditTask: (taskId: number) => void;
+  handleInputChange: (taskId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSaveTask: (taskId: number) => void;
+}
 
 const TodoList: FC<TtodoList> = ({
   todoData,

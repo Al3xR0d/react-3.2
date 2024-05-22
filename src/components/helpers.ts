@@ -1,13 +1,3 @@
-export type TodoObject = {
-  label: string;
-  done: boolean;
-  id: number;
-  isEditing: boolean;
-  createTime: Date;
-  newName: string;
-  diffInMinutes: number;
-};
-
 export function createTodoItem(label: string) {
   return {
     label,
@@ -39,7 +29,3 @@ export function getMinutesText(minutes: number) {
     return 'минут';
   }
 }
-
-export type Tfiltres = {
-  [key: string]: (val?: TodoObject) => boolean;
-};

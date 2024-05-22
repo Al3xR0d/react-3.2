@@ -7,17 +7,29 @@ import { Search } from './components/Search/Search';
 import { Tasks } from './components/Tasks/Tasks';
 import { TodoList } from './components/TodoList/TodoList';
 import { createTodoItem, calculateDiffInMinutes } from './components/helpers';
-import { TodoObject } from './components/helpers';
-import { Tfiltres } from './components/helpers';
+import { TodoObject } from './components/Types/types';
+import { Tfiltres } from './components/Types/types';
 
-class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; timerID: NodeJS.Timeout | undefined }> {
-  constructor(props: any) {
+enum Filtres {
+  All = 'all',
+  Active = 'active',
+  Done = 'done',
+}
+
+interface AppType {
+  todoData: TodoObject[];
+  filter: Filtres;
+}
+
+class App extends React.Component<{}, AppType> {
+  constructor(props = {}) {
     super(props);
+    this.timerID;
     this.state = {
       todoData: [],
-      filter: 'all',
-      timerID: undefined,
+      filter: Filtres.All,
     };
+
     this.deleteItem = this.deleteItem.bind(this);
     this.addItem = this.addItem.bind(this);
     this.onToggleDone = this.onToggleDone.bind(this);
@@ -29,6 +41,8 @@ class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; 
     this.handleSaveTask = this.handleSaveTask.bind(this);
     this.handleDeleteCompletedTasks = this.handleDeleteCompletedTasks.bind(this);
   }
+
+  timerID: NodeJS.Timeout | undefined = undefined;
 
   handleDeleteCompletedTasks() {
     this.setState((prevState) => ({
@@ -96,25 +110,25 @@ class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; 
         ...element,
         diffInMinutes: calculateDiffInMinutes(element.createTime),
       }));
-
-      this.setState({ todoData: updatedElements, timerID: timerID });
+      this.timerID = timerID;
+      this.setState({ todoData: updatedElements });
     }, 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timerID);
+    clearInterval(this.timerID);
   }
 
   onFilterAll() {
-    this.setState({ filter: 'all' });
+    this.setState({ filter: Filtres.All });
   }
 
   onFilterDone() {
-    this.setState({ filter: 'done' });
+    this.setState({ filter: Filtres.Done });
   }
 
   onFilterActive() {
-    this.setState({ filter: 'active' });
+    this.setState({ filter: Filtres.Active });
   }
 
   filterTasks() {
@@ -132,7 +146,6 @@ class App extends React.Component<{}, { todoData: TodoObject[]; filter: string; 
     const doneCount = this.state.todoData.filter((el) => el.done).length;
     const todoCount = this.state.todoData.length;
     const activeFilter = this.state.filter;
-    // const data = this.state.todoData;
     return (
       <div>
         <Header />

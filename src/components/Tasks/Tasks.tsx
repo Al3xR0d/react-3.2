@@ -1,7 +1,12 @@
 import { FC } from 'react';
 
-import { Ttasks } from './types';
+// import { Ttasks } from './types';
 import './Tasks.css';
+
+interface Ttasks {
+  todo: number;
+  done: number;
+}
 
 const Tasks: FC<Ttasks> = ({ todo, done }) => {
   return (

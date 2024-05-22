@@ -1,9 +1,15 @@
 import React from 'react';
 import './Search.css';
 
-import { TProps } from './types';
+interface SearchState {
+  label: string;
+}
 
-class Search extends React.Component<TProps, { label: string }> {
+interface TProps {
+  addItem: (text: string) => void;
+}
+
+class Search extends React.Component<TProps, SearchState> {
   constructor(props: TProps) {
     super(props);
     this.state = {

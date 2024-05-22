@@ -2,13 +2,15 @@ import React from 'react';
 
 import './Buttons.css';
 
-class Buttons extends React.Component<{
+interface ButtonsTypes {
   onFilterAll: () => void;
   onFilterDone: () => void;
   onFilterActive: () => void;
   activeFilter: string;
   handleDeleteCompletedTasks: () => void;
-}> {
+}
+
+class Buttons extends React.Component<ButtonsTypes> {
   render() {
     const { onFilterAll, onFilterDone, onFilterActive, activeFilter, handleDeleteCompletedTasks } = this.props;
     return (

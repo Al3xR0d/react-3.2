@@ -2,17 +2,16 @@ import React from 'react';
 
 import './TodoListItem.css';
 
-class TodoListItem extends React.Component<
-  {
-    label: string;
-    done: boolean;
-    handleInputChange: (taskId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleSaveTask: (taskId: number) => void;
-    isEditing: boolean;
-    id: number;
-  },
-  {}
-> {
+interface TodoListItemProps {
+  label: string;
+  done: boolean;
+  handleInputChange: (taskId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSaveTask: (taskId: number) => void;
+  isEditing: boolean;
+  id: number;
+}
+
+class TodoListItem extends React.Component<TodoListItemProps, {}> {
   render() {
     const { label, done, handleInputChange, handleSaveTask, isEditing, id } = this.props;
     let classNames: string = 'todoListItem';

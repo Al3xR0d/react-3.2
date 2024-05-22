@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 
-import { PropsType, StateType } from './types';
+// import { PropsType, StateType } from './types';
+import { ReactNode } from 'react';
+import { TPosition } from '../Types/types';
+
+interface PropsType {
+  text: string;
+  children: ReactNode;
+}
+
+interface StateType {
+  showTooltip: boolean;
+  tooltipPosition: TPosition;
+}
 
 class Tooltip extends Component<PropsType, StateType> {
   constructor(props: PropsType) {
