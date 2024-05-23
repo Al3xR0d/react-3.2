@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Buttons.css';
 
-interface ButtonsTypes {
+interface Props {
   onFilterAll: () => void;
   onFilterDone: () => void;
   onFilterActive: () => void;
@@ -10,7 +10,7 @@ interface ButtonsTypes {
   handleDeleteCompletedTasks: () => void;
 }
 
-class Buttons extends React.Component<ButtonsTypes> {
+class Buttons extends React.Component<Props, {}> {
   render() {
     const { onFilterAll, onFilterDone, onFilterActive, activeFilter, handleDeleteCompletedTasks } = this.props;
     return (

@@ -3,7 +3,11 @@ import React from 'react';
 import Trash from '../../images/trash.png';
 import './TrashPic.css';
 
-class TrashPic extends React.Component<{ onDeleted: () => void }, {}> {
+interface Props {
+  onDeleted: () => void;
+}
+
+class TrashPic extends React.Component<Props, {}> {
   render() {
     const { onDeleted } = this.props;
     return (

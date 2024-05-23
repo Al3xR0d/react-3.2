@@ -16,3 +16,9 @@ export interface TPosition {
   x: number;
   y: number;
 }
+
+export enum Filtres {
+  All = 'all',
+  Active = 'active',
+  Done = 'done',
+}

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-// import { PropsType, StateType } from './types';
 import { ReactNode } from 'react';
-import { TPosition } from '../Types/types';
+import { TPosition } from '../../Types/types';
 
-interface PropsType {
+interface Props {
   text: string;
   children: ReactNode;
 }
 
-interface StateType {
+interface State {
   showTooltip: boolean;
   tooltipPosition: TPosition;
 }
 
-class Tooltip extends Component<PropsType, StateType> {
-  constructor(props: PropsType) {
+class Tooltip extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       showTooltip: false,

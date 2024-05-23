@@ -7,21 +7,16 @@ import { Search } from './components/Search/Search';
 import { Tasks } from './components/Tasks/Tasks';
 import { TodoList } from './components/TodoList/TodoList';
 import { createTodoItem, calculateDiffInMinutes } from './components/helpers';
-import { TodoObject } from './components/Types/types';
-import { Tfiltres } from './components/Types/types';
+import { TodoObject } from './Types/types';
+import { Tfiltres } from './Types/types';
+import { Filtres } from './Types/types';
 
-enum Filtres {
-  All = 'all',
-  Active = 'active',
-  Done = 'done',
-}
-
-interface AppType {
+interface State {
   todoData: TodoObject[];
   filter: Filtres;
 }
 
-class App extends React.Component<{}, AppType> {
+class App extends React.Component<{}, State> {
   constructor(props = {}) {
     super(props);
     this.timerID;

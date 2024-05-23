@@ -5,11 +5,11 @@ import { TodoListItem } from '../TodoListItem/TodoListItem';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { TrashPic } from '../TrashPic/TrashPic';
 import { getMinutesText } from '../helpers';
-import { TodoObject } from '../Types/types';
+import { TodoObject } from '../../Types/types';
 
 import './TodoList.css';
 
-interface TtodoList {
+interface Props {
   todoData: TodoObject[];
   onDeleted: (id: number) => void;
   onToggleDone: (id: number) => void;
@@ -18,7 +18,7 @@ interface TtodoList {
   handleSaveTask: (taskId: number) => void;
 }
 
-const TodoList: FC<TtodoList> = ({
+const TodoList: FC<Props> = ({
   todoData,
   onDeleted,
   onToggleDone,

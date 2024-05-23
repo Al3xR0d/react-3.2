@@ -1,14 +1,13 @@
 import { FC } from 'react';
 
-// import { Ttasks } from './types';
 import './Tasks.css';
 
-interface Ttasks {
+interface Props {
   todo: number;
   done: number;
 }
 
-const Tasks: FC<Ttasks> = ({ todo, done }) => {
+const Tasks: FC<Props> = ({ todo, done }) => {
   return (
     <div className="tasks">
       <span className="allTasks tasksStyle">

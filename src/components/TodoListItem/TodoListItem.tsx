@@ -2,7 +2,7 @@ import React from 'react';
 
 import './TodoListItem.css';
 
-interface TodoListItemProps {
+interface Props {
   label: string;
   done: boolean;
   handleInputChange: (taskId: number, e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +11,7 @@ interface TodoListItemProps {
   id: number;
 }
 
-class TodoListItem extends React.Component<TodoListItemProps, {}> {
+class TodoListItem extends React.Component<Props, {}> {
   render() {
     const { label, done, handleInputChange, handleSaveTask, isEditing, id } = this.props;
     let classNames: string = 'todoListItem';

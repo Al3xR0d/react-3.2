@@ -2,11 +2,11 @@ import React from 'react';
 
 import Edit from '../../images/edit-line-black.png';
 
-interface EditTypes {
+interface Props {
   handleEditTask: () => void;
 }
 
-class EditPic extends React.Component<EditTypes, {}> {
+class EditPic extends React.Component<Props, {}> {
   render() {
     const { handleEditTask } = this.props;
     return (
